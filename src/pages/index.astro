@@ -1,17 +1,120 @@
 ---
+import Base from "../layouts/Base.astro";
+import { getPosts } from "../lib/wordpress";
 
+// Vrais articles tirés de WordPress (headless).
+const posts = await getPosts(6);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+  <main>
+    <!-- Hero -->
+    <section class="wrap hero">
+      <!-- Portrait : s'affiche dès que /portrait.png existe ; sinon placeholder -->
+      <figure class="portrait">
+        <img
+          class="portrait__img"
+          src="/portrait.png"
+          alt="Portrait dessiné de Hugo Betelu"
+          width="800"
+          height="800"
+          onerror="this.closest('.portrait').classList.add('portrait--empty'); this.remove();"
+        />
+        <figcaption class="portrait__ph">portrait à venir</figcaption>
+      </figure>
+
+      <p class="intro">
+        Depuis 10 ans, je cours sur les sentiers. J'écris des mots et je capture
+        des images pour les mettre en récit. Je viens de finir mon premier film{" "}
+        <strong>Viva Verdon</strong> qui défend une approche différente du
+        territoire en tant que traileur.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn--solid" href="/contact">contact</a>
+        <a class="btn btn--outline" href="https://instagram.com" rel="me">instagram</a>
+      </div>
+    </section>
+
+    <hr class="rule wrap" />
+
+    <!-- Projets / Production / Écriture -->
+    <section class="wrap projects">
+      <h2 class="display section-title">Projets, production, écriture</h2>
+
+      {
+        posts.map((post) => (
+          <article class="project">
+            <h3 class="project-title" set:html={post.title} />
+            <div class="project-excerpt" set:html={post.excerpt} />
+            <a class="btn btn--solid" href={`/${post.slug}`}>
+              lire
+            </a>
+          </article>
+        ))
+      }
+    </section>
+  </main>
+</Base>
+
+<style>
+  .hero {
+    padding-top: 0.5rem;
+  }
+  .portrait {
+    margin: 0 0 1.75rem;
+  }
+  .portrait__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .portrait__ph {
+    display: none;
+  }
+  .portrait--empty {
+    aspect-ratio: 1 / 1;
+    background: #f3f3f3;
+    border: 1px dashed #cfcfcf;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .portrait--empty .portrait__ph {
+    display: block;
+  }
+  .intro {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 0 0 1.5rem;
+  }
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.55rem;
+    margin: 0 0 1.75rem;
+  }
+  .project {
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .project:last-child {
+    border-bottom: 0;
+  }
+  .project-title {
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin: 0 0 0.5rem;
+  }
+  .project-excerpt {
+    color: #222;
+    margin: 0 0 1rem;
+  }
+  .project-excerpt :global(p) {
+    margin: 0;
+  }
+</style>
