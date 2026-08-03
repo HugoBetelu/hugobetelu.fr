@@ -1,0 +1,70 @@
+---
+import Base from "../layouts/Base.astro";
+import { getAllPosts } from "../lib/wordpress";
+
+const posts = await getAllPosts();
+---
+
+<Base title="Journal — Hugo Betelu">
+  <main class="wrap blog">
+    <h1 class="display section-title">Journal</h1>
+
+    <div class="entries">
+      {posts.map((post) => (
+        <article class="entry">
+          <a class="entry-link" href={`/${post.slug}`}>
+            <h2 class="entry-title" set:html={post.title} />
+          </a>
+          <div class="entry-excerpt" set:html={post.excerpt} />
+          <a class="entry-more" href={`/${post.slug}`}>lire →</a>
+        </article>
+      ))}
+    </div>
+  </main>
+</Base>
+
+<style>
+  .blog {
+    padding-block: 1rem 4rem;
+  }
+  .entries {
+    display: grid;
+    gap: 0;
+  }
+  .entry {
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .entry:first-child {
+    padding-top: 0;
+  }
+  .entry-link {
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .entry-title {
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    margin: 0 0 0.5rem;
+  }
+  .entry-link:hover .entry-title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .entry-excerpt {
+    color: #222;
+    margin: 0 0 0.75rem;
+  }
+  .entry-excerpt :global(p) {
+    margin: 0;
+  }
+  .entry-more {
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .entry-more:hover {
+    text-decoration: underline;
+  }
+</style>

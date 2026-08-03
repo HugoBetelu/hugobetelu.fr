@@ -16,10 +16,27 @@ export interface Post {
   slug: string;
   /** HTML rendu (contient entités/accents) — à afficher avec set:html */
   title: string;
+  /** Titre en texte brut (entités décodées) — pour <title>, aria, etc. */
+  titleText: string;
   excerpt: string;
   content: string;
   date: string;
   image: WPImage | null;
+}
+
+/** Décode les entités HTML et retire les balises (pour titres en texte brut). */
+function decodeEntities(s: string): string {
+  return s
+    .replace(/<[^>]*>/g, "")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(parseInt(n, 10)))
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .trim();
 }
 
 export interface Page {
@@ -41,10 +58,12 @@ function featuredImage(node: any): WPImage | null {
 }
 
 function mapPost(p: any): Post {
+  const title = p.title?.rendered ?? "";
   return {
     id: p.id,
     slug: p.slug,
-    title: p.title?.rendered ?? "",
+    title,
+    titleText: decodeEntities(title),
     excerpt: p.excerpt?.rendered ?? "",
     content: p.content?.rendered ?? "",
     date: p.date,
@@ -65,6 +84,12 @@ export async function getPosts(perPage = 12): Promise<Post[]> {
   const data = await wpFetch(
     `/wp/v2/posts?per_page=${perPage}&_embed=wp:featuredmedia`,
   );
+  return data.map(mapPost);
+}
+
+/** Tous les articles (pour les listes et la génération des pages). */
+export async function getAllPosts(): Promise<Post[]> {
+  const data = await wpFetch(`/wp/v2/posts?per_page=100&_embed=wp:featuredmedia`);
   return data.map(mapPost);
 }
 

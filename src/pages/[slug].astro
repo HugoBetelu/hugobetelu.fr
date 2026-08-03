@@ -1,0 +1,112 @@
+---
+import Base from "../layouts/Base.astro";
+import { getAllPosts } from "../lib/wordpress";
+
+// Génère une page par article, avec les mêmes slugs que WordPress (SEO préservé).
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const dateFmt = new Date(post.date).toLocaleDateString("fr-FR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<Base title={`${post.titleText} — Hugo Betelu`}>
+  <main class="wrap article">
+    <a class="back display" href="/blog">← Journal</a>
+
+    <h1 class="article-title" set:html={post.title} />
+    <time class="article-date" datetime={post.date}>{dateFmt}</time>
+
+    {post.image && (
+      <img
+        class="article-cover"
+        src={post.image.src}
+        alt={post.image.alt}
+        width={post.image.width}
+        height={post.image.height}
+      />
+    )}
+
+    <div class="article-content" set:html={post.content} />
+  </main>
+</Base>
+
+<style>
+  .article {
+    padding-block: 1rem 4rem;
+  }
+  .back {
+    display: inline-block;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+  }
+  .back:hover {
+    color: var(--ink);
+  }
+  .article-title {
+    font-size: 2.1rem;
+    line-height: 1.15;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .article-date {
+    display: block;
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+  .article-cover {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+  }
+
+  /* Contenu injecté depuis WordPress */
+  .article-content :global(p) {
+    margin: 0 0 1.25rem;
+  }
+  .article-content :global(h2) {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    margin: 2.5rem 0 1rem;
+  }
+  .article-content :global(h3) {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 2rem 0 0.75rem;
+  }
+  .article-content :global(img) {
+    width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+  }
+  .article-content :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .article-content :global(blockquote) {
+    margin: 1.5rem 0;
+    padding-left: 1.25rem;
+    border-left: 3px solid var(--ink);
+    font-style: italic;
+  }
+  .article-content :global(figure) {
+    margin: 1.5rem 0;
+  }
+  .article-content :global(figcaption) {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+</style>
