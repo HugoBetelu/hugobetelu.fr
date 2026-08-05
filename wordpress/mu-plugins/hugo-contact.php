@@ -10,7 +10,9 @@ if (!defined('ABSPATH')) {
 }
 
 // Adresse de réception des messages.
-define('HUGO_CONTACT_TO', 'hugobetelu@gmail.com');
+// ⚠️ Copie versionnée (dépôt public) : email volontairement masqué.
+//     La vraie adresse est définie dans la copie ACTIVE côté WordPress.
+define('HUGO_CONTACT_TO', 'REMPLACER_PAR_TON_EMAIL@exemple.com');
 
 add_action('rest_api_init', function () {
     register_rest_route('hugo/v1', '/contact', [

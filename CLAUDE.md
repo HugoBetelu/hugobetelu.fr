@@ -16,7 +16,7 @@ Depuis ce dossier :
 ## Contenu (WordPress headless)
 - Base API : variable `PUBLIC_WP_API` dans `.env`. Dev = copie locale ; prod = `https://hugobetelu.fr`.
 - Couche de données : `src/lib/wordpress.ts` (`getPosts` / `getPostBySlug` / `getPageBySlug`).
-- **Copie locale WordPress** (app *Local*) : `~/Local Sites/hugobetelufr/app/public`, URL `http://hugobetelufr.local`, login wp-admin `admin4921`. Le site doit être **démarré dans Local** pour que l'API réponde.
+- **Copie locale WordPress** (app *Local*) : `~/Local Sites/hugobetelufr/app/public`, URL `http://hugobetelufr.local`, login wp-admin = identifiant habituel de Hugo (non versionné, dépôt public). Le site doit être **démarré dans Local** pour que l'API réponde.
 - Piloter WP-CLI hors shell Local : charger l'env depuis `~/Local Sites/hugobetelufr/app/.envrc` (`PHPRC`, `MYSQL_HOME`, `PATH` ; l'identifiant de run change à chaque redémarrage). Les commandes **PHP** (`wp option get`, `wp search-replace`, `wp post list`) marchent ; les commandes **binaire mysql** (`wp db query/import/export`) cherchent le mauvais socket `/tmp/mysql.sock` → préférer les commandes PHP.
 
 ## Design
