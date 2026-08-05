@@ -24,7 +24,11 @@ import projects from "../data/projects.json";
       <p class="intro">
         Depuis 10 ans, je cours sur les sentiers. J'écris des mots et je capture
         des images pour les mettre en récit. Je viens de finir mon premier film{" "}
-        <strong>Viva Verdon</strong> qui défend une approche différente du
+        <a
+          class="intro-link"
+          href="https://www.vivaverdon.com/"
+          target="_blank"
+          rel="noopener noreferrer"><strong>Viva Verdon</strong></a> qui défend une approche différente du
         territoire en tant que traileur.
       </p>
 
@@ -36,7 +40,7 @@ import projects from "../data/projects.json";
 
     <!-- Projets / Production / Écriture -->
     <section class="wrap projects">
-      <h2 class="display section-title">Projets, production, écriture</h2>
+      <h2 class="display section-title">Background</h2>
 
       {
         projects.map((project) => (
@@ -44,6 +48,16 @@ import projects from "../data/projects.json";
             <p class="project-period display">{project.period}</p>
             <h3 class="project-title">{project.title}</h3>
             <p class="project-body">{project.body}</p>
+            {project.url && (
+              <a
+                class="btn btn--solid project-btn"
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                voir
+              </a>
+            )}
           </article>
         ))
       }
@@ -83,6 +97,11 @@ import projects from "../data/projects.json";
     line-height: 1.5;
     margin: 0 0 1.5rem;
   }
+  .intro-link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
   .actions {
     display: flex;
     gap: 0.75rem;
@@ -114,5 +133,8 @@ import projects from "../data/projects.json";
   .project-body {
     color: #222;
     margin: 0;
+  }
+  .project-btn {
+    margin-top: 1rem;
   }
 </style>
