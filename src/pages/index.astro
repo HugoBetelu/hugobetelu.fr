@@ -1,9 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
-import { getPosts } from "../lib/wordpress";
-
-// Vrais articles tirés de WordPress (headless).
-const posts = await getPosts(6);
+// Projets = contenu géré dans le code (fourni par Hugo), pas dans WordPress.
+import projects from "../data/projects.json";
 ---
 
 <Base>
@@ -41,20 +39,14 @@ const posts = await getPosts(6);
       <h2 class="display section-title">Projets, production, écriture</h2>
 
       {
-        posts.map((post) => (
+        projects.map((project) => (
           <article class="project">
-            <h3 class="project-title" set:html={post.title} />
-            <div class="project-excerpt" set:html={post.excerpt} />
-            <a class="btn btn--solid" href={`/${post.slug}`}>
-              lire
-            </a>
+            <p class="project-period display">{project.period}</p>
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-body">{project.body}</p>
           </article>
         ))
       }
-
-      <div class="more">
-        <a class="btn btn--outline" href="/blog">voir plus</a>
-      </div>
     </section>
   </main>
 </Base>
@@ -100,28 +92,27 @@ const posts = await getPosts(6);
     padding-top: 3rem;
   }
 
-  .more {
-    display: flex;
-    justify-content: center;
-    margin-top: 2.25rem;
-  }
   .project {
-    padding-block: 1.25rem;
+    padding-block: 1.5rem;
     border-bottom: 1px solid var(--line);
   }
   .project:last-child {
     border-bottom: 0;
   }
+  .project-period {
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin: 0 0 0.4rem;
+  }
   .project-title {
     font-weight: 700;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
+    line-height: 1.25;
     margin: 0 0 0.5rem;
   }
-  .project-excerpt {
+  .project-body {
     color: #222;
-    margin: 0 0 1rem;
-  }
-  .project-excerpt :global(p) {
     margin: 0;
   }
 </style>
