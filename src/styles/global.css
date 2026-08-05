@@ -44,8 +44,17 @@
   --font-display: "League Gothic", "Arial Narrow", sans-serif; /* titres condensés, CAPS */
   --font-body: "Lora", Georgia, "Times New Roman", serif; /* corps serif */
 
-  --measure: 34rem;      /* largeur de lecture */
+  --measure: 34rem;      /* largeur de lecture (mobile) */
   --gutter: 1.5rem;      /* marge latérale mobile */
+}
+
+/* Colonne de lecture un peu plus large sur desktop
+   (≈ 66–74 caractères/ligne pour un confort de lecture optimal). */
+@media (min-width: 820px) {
+  :root {
+    --measure: 38rem;
+    --gutter: 2rem;
+  }
 }
 
 *,
