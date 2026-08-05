@@ -1,0 +1,145 @@
+---
+import Base from "../layouts/Base.astro";
+// Le formulaire POST vers l'endpoint WordPress (mu-plugin hugo-contact.php),
+// qui envoie un email à hugobetelu@gmail.com.
+const WP_API = import.meta.env.PUBLIC_WP_API ?? "http://hugobetelufr.local/wp-json";
+---
+
+<Base
+  title="Contact — Hugo Betelu"
+  description="Écrivez à Hugo Betelu : une idée, un projet, une envie de collaborer."
+>
+  <main class="wrap contact">
+    <h1 class="display section-title">Contact</h1>
+    <p class="contact-intro">
+      Une idée, un projet, une envie de collaborer ? Écrivez-moi, je réponds.
+    </p>
+
+    <form id="contact-form" class="contact-form" novalidate>
+      <label class="field">
+        <span>Nom</span>
+        <input type="text" name="name" required autocomplete="name" />
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" required autocomplete="email" />
+      </label>
+      <label class="field">
+        <span>Message</span>
+        <textarea name="message" rows="6" required></textarea>
+      </label>
+
+      <!-- Anti-spam : champ piège, invisible, doit rester vide -->
+      <input
+        type="text"
+        name="website"
+        class="hp"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+      />
+
+      <button type="submit" class="btn btn--solid">envoyer</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+</Base>
+
+<script define:vars={{ WP_API }}>
+  const form = document.getElementById("contact-form");
+  const status = form.querySelector(".form-status");
+  const button = form.querySelector("button[type=submit]");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.name.value.trim() || !form.email.value.trim() || !form.message.value.trim()) {
+      status.textContent = "Merci de remplir tous les champs.";
+      return;
+    }
+    button.disabled = true;
+    status.textContent = "Envoi…";
+
+    try {
+      const res = await fetch(`${WP_API}/hugo/v1/contact`, {
+        method: "POST",
+        body: new URLSearchParams(new FormData(form)),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && json.ok) {
+        form.reset();
+        status.textContent = "Merci ! Votre message a bien été envoyé.";
+      } else {
+        status.textContent = json.error || "Une erreur est survenue. Merci de réessayer.";
+      }
+    } catch (err) {
+      status.textContent = "Impossible d'envoyer le message pour le moment.";
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .contact {
+    padding-block: 1rem 4rem;
+  }
+  .contact-intro {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 32rem;
+    margin: 0 0 2rem;
+  }
+  .contact-form {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 32rem;
+  }
+  .field {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .field span {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .field input,
+  .field textarea {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 0.7rem 0.85rem;
+    border: 1.5px solid var(--ink);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--ink);
+    width: 100%;
+  }
+  .field textarea {
+    resize: vertical;
+  }
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .contact-form button {
+    justify-self: start;
+    cursor: pointer;
+  }
+  .contact-form button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  .form-status {
+    margin: 0;
+    min-height: 1.4em;
+    font-size: 0.95rem;
+  }
+  /* Champ anti-spam masqué */
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+</style>

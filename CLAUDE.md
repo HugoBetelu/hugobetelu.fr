@@ -30,6 +30,13 @@ Depuis ce dossier :
 - `src/components/Header.astro` — nav desktop + burger mobile. **Liens de nav = PROVISOIRES**, en attente de la nouvelle architecture de Hugo.
 - `src/styles/global.css` — tokens (couleurs, typo), boutons pastille.
 
+## Contact (formulaire → email)
+- Front : `src/pages/contact.astro` poste (form-urlencoded) vers l'endpoint WP `POST /wp-json/hugo/v1/contact`.
+- Back : mu-plugin WordPress `hugo-contact.php` (validation, honeypot anti-spam, `wp_mail` vers hugobetelu@gmail.com, en-tête CORS `*`).
+  - **Copie versionnée** dans ce dépôt : `wordpress/mu-plugins/hugo-contact.php`. Le fichier ACTIF est côté WordPress : `~/Local Sites/hugobetelufr/app/public/wp-content/mu-plugins/`.
+  - En local, l'email est capturé par **Mailpit** (Local), pas envoyé au vrai Gmail.
+  - **Déploiement** : copier ce mu-plugin dans le WordPress de prod + installer **WP Mail SMTP** pour une livraison fiable vers Gmail.
+
 ## À faire (prochaines étapes)
 - **Nouvelle architecture** (Hugo doit la fournir) → ajuster la nav et les pages.
 - Déposer `public/portrait.png`.
