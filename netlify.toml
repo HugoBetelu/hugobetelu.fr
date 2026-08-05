@@ -1,0 +1,10 @@
+# Configuration de déploiement Netlify (site statique Astro).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  # Source de contenu pour le build en production = WordPress en ligne.
+  # À mettre à jour si WordPress déménage sur un sous-domaine (ex. cms.hugobetelu.fr).
+  PUBLIC_WP_API = "https://hugobetelu.fr/wp-json"
