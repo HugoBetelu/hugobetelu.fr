@@ -5,6 +5,5 @@
 
 [build.environment]
   NODE_VERSION = "22"
-  # Source de contenu pour le build en production = WordPress en ligne.
-  # À mettre à jour si WordPress déménage sur un sous-domaine (ex. cms.hugobetelu.fr).
-  PUBLIC_WP_API = "https://hugobetelu.fr/wp-json"
+  # Source de contenu = WordPress (headless), désormais sur le sous-domaine cms.
+  PUBLIC_WP_API = "https://cms.hugobetelu.fr/wp-json"
