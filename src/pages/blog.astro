@@ -16,7 +16,7 @@ const posts = await getAllPosts();
             <h2 class="entry-title" set:html={post.title} />
           </a>
           <div class="entry-excerpt" set:html={post.excerpt} />
-          <a class="entry-more" href={`/${post.slug}`}>lire →</a>
+          <a class="entry-more" href={`/${post.slug}`}>Lire →</a>
         </article>
       ))}
     </div>
