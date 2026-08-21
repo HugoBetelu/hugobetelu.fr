@@ -73,6 +73,37 @@ import Base from "../layouts/Base.astro";
         </a>
       </div>
     </section>
+
+    <!-- Carte Blanche -->
+    <section class="wrap carte-blanche">
+      <h2 class="display cb-title">Carte Blanche</h2>
+      <div class="cb-cards">
+        <a
+          class="cb-card"
+          href="https://ventdebout.kessel.media/posts/pst_6c02ba9dc6fa4ef498f89de3dc5b3ce4/12-trail-un-autre-rapport-aux-territoires-est-il-possible-carte-blanche-a-hugo-betelu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="cb-card__media">
+            <img src="/media/carte-blanche-1.jpg" alt="Trail : un autre rapport aux territoires est-il possible ? — partie 1" loading="lazy" />
+          </div>
+          <p class="cb-card__source">Vent Debout · 1/2</p>
+          <h3 class="cb-card__title">Trail : un autre rapport aux territoires est-il possible ?</h3>
+        </a>
+        <a
+          class="cb-card"
+          href="https://ventdebout.kessel.media/posts/pst_2451ebba34514080bab65e0976299397/22-trail-un-autre-rapport-aux-territoires-est-il-possible-carte-blanche-a-hugo-betelu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="cb-card__media">
+            <img src="/media/carte-blanche-2.jpg" alt="Trail : un autre rapport aux territoires est-il possible ? — partie 2" loading="lazy" />
+          </div>
+          <p class="cb-card__source">Vent Debout · 2/2</p>
+          <h3 class="cb-card__title">Trail : un autre rapport aux territoires est-il possible ?</h3>
+        </a>
+      </div>
+    </section>
   </main>
 </Base>
 
@@ -154,5 +185,64 @@ import Base from "../layouts/Base.astro";
   /* logo carré (BFM) : un peu plus haut pour un poids visuel équilibré */
   .press-logo img.press-logo--square {
     max-height: 44px;
+  }
+
+  /* Carte Blanche */
+  .carte-blanche {
+    padding-top: 3rem;
+  }
+  .cb-title {
+    font-size: 1.7rem;
+    margin: 0 0 1.5rem;
+  }
+  .cb-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .cb-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .cb-card__media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #f4f4f4;
+  }
+  .cb-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+  .cb-card:hover .cb-card__media img {
+    transform: scale(1.04);
+  }
+  .cb-card__source {
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0.6rem 0 0.25rem;
+  }
+  .cb-card__title {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .cb-card:hover .cb-card__title {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  @media (max-width: 480px) {
+    .cb-card__title {
+      font-size: 0.9rem;
+    }
+    .cb-card__source {
+      font-size: 0.7rem;
+    }
   }
 </style>
