@@ -1,0 +1,110 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Projets — Hugo Betelu"
+  description="Les projets de Hugo Betelu : le film et le magazine Viva Verdon."
+>
+  <main class="wrap projets">
+    <h1 class="display section-title">Projets</h1>
+
+    <section class="proj-group">
+      <h2 class="display group-title">Récents</h2>
+
+      <article class="proj">
+        <h3 class="proj-title">Film Viva Verdon</h3>
+        <p class="proj-desc">
+          Dans Viva Verdon, on suit Hugo et Maxime, deux traileurs qui
+          s'affranchissent de la logique de performance pour redécouvrir le trail
+          sous sa forme humaine et sensible. Au fil de leur tour des gorges du
+          Verdon, leurs rencontres dessinent le portrait d'un territoire vibrant,
+          entre richesses et défis.
+        </p>
+
+        {/* PHOTOS FILM : 2 colonnes desktop / empilées mobile — à insérer quand fournies */}
+
+        <a
+          class="btn btn--solid proj-cta"
+          href="https://www.vivaverdon.com/"
+          target="_blank"
+          rel="noopener noreferrer">découvrir Viva Verdon</a>
+      </article>
+
+      <article class="proj">
+        <h3 class="proj-title">Magazine Viva Verdon</h3>
+        <p class="proj-desc">
+          Viva Verdon est, au départ, un projet un peu fou. Celui de réaliser une
+          itinérance en trail autour des gorges du Verdon et d'en faire un film.
+          Ce magazine, lui, est un objet hybride qui vient compléter le film en
+          donnant la parole à celles et ceux que l'on a rencontrés sur les
+          sentiers ou en retournant à de multiples reprises dans le Verdon. C'est
+          aussi un objet de réflexion sur les pratiques du trail et les enjeux
+          qu'il renferme. Comme le film, ce magazine cherche à faire dialoguer des
+          mondes qui ne se fréquentent pas toujours, alors qu'ils évoluent pourtant
+          à quelques centaines de mètres à vol d'oiseau, séparés par le plus grand
+          canyon d'Europe. Ce magazine est le fruit de 2 ans de travail pendant
+          lesquels l'équipe de Viva Verdon est partie, micro tendu dans une main et
+          appareil photo dans l'autre, capturer des récits uniques.
+        </p>
+
+        {/* PHOTOS MAGAZINE : extraits du magazine — à insérer quand fournies */}
+
+        <a
+          class="btn btn--solid proj-cta"
+          href="https://www.vivaverdon.com/"
+          target="_blank"
+          rel="noopener noreferrer">découvrir Viva Verdon</a>
+      </article>
+    </section>
+
+    {/* 2e section (nom à confirmer avec Hugo) — à ajouter */}
+  </main>
+</Base>
+
+<style>
+  .projets {
+    padding-block: 1rem 4rem;
+  }
+  .group-title {
+    font-size: 1.7rem;
+    margin: 2.5rem 0 0;
+  }
+  .proj {
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .proj-title {
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+  }
+  .proj-desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+    max-width: 40rem;
+  }
+  /* Grille photos (utilisée quand les images seront insérées) */
+  .proj-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+  }
+  .proj-photos img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  @media (max-width: 600px) {
+    .proj-photos {
+      grid-template-columns: 1fr;
+    }
+  }
+  .proj-cta {
+    margin-top: 0.5rem;
+  }
+</style>
