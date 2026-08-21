@@ -64,6 +64,16 @@ const { title, description } = Astro.props;
     height: auto;
     display: block;
   }
+  /* Variante « uniforme » : toutes les vignettes au même format (recadrage propre) */
+  .detail-body .photos--uniform img {
+    aspect-ratio: 3 / 2;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Variante « empilée » : images en pleine largeur, sans recadrage */
+  .detail-body .photos--stack {
+    grid-template-columns: 1fr;
+  }
   @media (max-width: 600px) {
     .detail-body .photos {
       grid-template-columns: 1fr;
