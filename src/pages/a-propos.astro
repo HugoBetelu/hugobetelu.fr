@@ -1,101 +1,122 @@
 ---
 import Base from "../layouts/Base.astro";
-// Section « Background » (parcours), affichée sur la page À propos.
-import projects from "../data/projects.json";
+
+const pillars = [
+  {
+    title: "Analyser, documenter",
+    lead: "Comprendre ce que les mutations du monde racontent.",
+    body: "Capturer, documenter, analyser les histoires qu'on ignore, qu'on ne voit pas ou qu'on ne veut pas voir. Raconter aussi d'autres manières d'habiter le monde, de vivre ensemble ou de faire société.",
+    tags: ["photo-journalisme", "portrait", "interview", "article", "capsule vidéos"],
+  },
+  {
+    title: "S'émerveiller, inspirer",
+    lead: "S'inspirer des beautés du monde pour continuer à construire un récit commun.",
+    body: "L'émerveillement des choses qui nous entourent ne pourra peut-être pas changer le monde. Mais il nous permet de tenir bon. Et c'est déjà beaucoup. Mettre en valeur les merveilles du monde, les choses banales du quotidien, l'insignifiant et les moments volés.",
+    tags: ["photo", "vidéo", "écriture", "social media"],
+  },
+  {
+    title: "Sensibiliser, s'engager",
+    lead: "Agir pour faire bouger les consciences et les récits.",
+    body: "Produire des récits aujourd'hui comme on le faisait hier n'est plus possible. Le réchauffement climatique et ses conséquences rebattent les cartes de toute la société. Agir, s'engager et sensibiliser pour dessiner un futur souhaitable.",
+    tags: ["fresque du climat", "conférence trail x environnement", "photo", "article"],
+  },
+];
 ---
 
 <Base
   title="À propos — Hugo Betelu"
-  description="Une cabane au fond du web : les projets et les pensées de Hugo Betelu."
+  description="Journalisme, web et créativité : les 3 piliers des projets de Hugo Betelu."
 >
   <main class="wrap about">
-    <h1 class="display section-title">Une cabane au fond du web</h1>
+    <h1 class="sr-only">À propos</h1>
 
-    <div class="about-body">
-      <p>
-        Internet, comme le monde, est devenu une cacophonie que même les
-        algorithmes ont du mal à contenir. Dans ce vacarme ambiant, il est de
-        plus en plus difficile de trouver des espaces-temps pour soi-même.
-      </p>
-      <p>
-        J'ai donc construit cette « cabane » au fond du web qui présentera mes
-        projets et accueillera mes pensées aussi. Cette cabane sera aussi une
-        vitrine sur le monde et invitera celles et ceux qui y passent à saisir
-        des opportunités, proposer des idées, des projets.
-      </p>
+    <p class="about-lead">
+      Je cours depuis plus de 15 ans. Et je gravite depuis toujours dans le monde
+      du journalisme, du web et de la créativité. Je réalise des projets qui mixent
+      toutes ces disciplines et reposent sur 3 piliers.
+    </p>
+
+    <div class="pillars">
+      {pillars.map((p) => (
+        <section class="pillar">
+          <h2 class="display pillar-title">{p.title}</h2>
+          <p class="pillar-lead">{p.lead}</p>
+          <p class="pillar-body">{p.body}</p>
+          <ul class="tags">
+            {p.tags.map((t) => (
+              <li class="tag">{t}</li>
+            ))}
+          </ul>
+        </section>
+      ))}
     </div>
-
-    <!-- Background : parcours / projets -->
-    <section class="projects">
-      <h2 class="display section-title">Background</h2>
-
-      {
-        projects.map((project) => (
-          <article class="project">
-            <p class="project-period display">{project.period}</p>
-            <h3 class="project-title">{project.title}</h3>
-            <p class="project-body">{project.body}</p>
-            {project.url && (
-              <a
-                class="btn btn--solid project-btn"
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                voir
-              </a>
-            )}
-          </article>
-        ))
-      }
-    </section>
 
     <a class="btn btn--solid about-cta" href="/contact">collaborer avec moi</a>
   </main>
 </Base>
 
 <style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .about {
     padding-block: 1rem 4rem;
   }
-  .about-body {
-    font-size: 1.15rem;
-    line-height: 1.6;
+  .about-lead {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin: 0 0 3rem;
   }
-  .about-body p {
+
+  .pillars {
+    display: grid;
+    gap: 3rem;
+  }
+  .pillar {
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .pillar-title {
+    font-size: 1.7rem;
+    line-height: 1.05;
+    margin: 0 0 1rem;
+  }
+  .pillar-lead {
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin: 0 0 0.75rem;
+  }
+  .pillar-body {
     margin: 0 0 1.25rem;
   }
 
-  .projects {
-    padding-top: 2rem;
-  }
-  .project {
-    padding-block: 1.5rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .project:last-child {
-    border-bottom: 0;
-  }
-  .project-period {
-    font-size: 0.95rem;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    margin: 0 0 0.4rem;
-  }
-  .project-title {
-    font-weight: 700;
-    font-size: 1.2rem;
-    line-height: 1.25;
-    margin: 0 0 0.5rem;
-  }
-  .project-body {
-    color: #222;
+  .tags {
+    list-style: none;
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
-  .project-btn {
-    margin-top: 1rem;
+  .tag {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
   }
+
   .about-cta {
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
 </style>

@@ -20,15 +20,14 @@ import Base from "../layouts/Base.astro";
       </figure>
 
       <p class="intro">
-        Depuis 10 ans, je cours sur les sentiers comme je navigue entre la tech,
-        les médias et la création de contenu. J'écris des mots et je capture des
-        images pour les mettre en récit. Je viens de finir mon premier film{" "}
+        Depuis 15 ans, je cours sur les sentiers. J'écris des mots et je capture
+        des images pour les mettre en récit. Je viens de finir mon premier film{" "}
         <a
           class="intro-link"
           href="https://www.vivaverdon.com/"
           target="_blank"
-          rel="noopener noreferrer"><strong>Viva Verdon</strong></a> qui défend une approche différente du
-        territoire en tant que traileur.
+          rel="noopener noreferrer"><strong>Viva Verdon</strong></a> qui défend une approche
+        différente du trail, plus en lien avec le territoire.
       </p>
 
       <div class="actions">
@@ -38,6 +37,40 @@ import Base from "../layouts/Base.astro";
           href="https://www.instagram.com/hugobetelu/"
           target="_blank"
           rel="noopener noreferrer">instagram</a>
+      </div>
+    </section>
+
+    <!-- Ils parlent de Viva Verdon -->
+    <section class="wrap press">
+      <h2 class="display press-title">Ils parlent de Viva Verdon</h2>
+      <div class="press-logos">
+        <a
+          class="press-logo"
+          href="https://www.lesothers.com/projet-100-kilometres-ultra-trail-2"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Les Others (nouvel onglet)"
+        >
+          <img src="/media/lesothers.png" alt="Les Others" loading="lazy" />
+        </a>
+        <a
+          class="press-logo"
+          href="https://www.nicematin.com/societe/a-mi-chemin-entre-l-emission-nus-et-culottes-et-l-utmb-deux-amis-ultra-traileurs-a-la-recherche-de-fonds-pour-leur-documentaire-viva-verdon-10653464"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Var-Matin (nouvel onglet)"
+        >
+          <img src="/media/var-matin.png" alt="Var-Matin" loading="lazy" />
+        </a>
+        <a
+          class="press-logo"
+          href="https://www.bfmtv.com/cote-d-azur/replay-emissions/les-longs-formats-des-locales-nice-cote-d-azur/video-viva-verdon-un-trail-2-amis-des-rencontres_VN-202604270449.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="BFM TV (nouvel onglet)"
+        >
+          <img class="press-logo--square" src="/media/bfm.svg" alt="BFM TV" loading="lazy" />
+        </a>
       </div>
     </section>
   </main>
@@ -83,5 +116,43 @@ import Base from "../layouts/Base.astro";
   .actions {
     display: flex;
     gap: 0.75rem;
+  }
+
+  /* Ils parlent de Viva Verdon */
+  .press {
+    padding-top: 2.75rem;
+  }
+  .press-title {
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin: 0 0 1.25rem;
+  }
+  /* 3 colonnes égales → toujours sur une seule ligne (desktop + mobile) */
+  .press-logos {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .press-logo {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.15s ease;
+  }
+  .press-logo:hover {
+    opacity: 0.6;
+  }
+  .press-logo img {
+    width: auto;
+    max-width: 100%;
+    max-height: 30px;
+    object-fit: contain;
+    display: block;
+  }
+  /* logo carré (BFM) : un peu plus haut pour un poids visuel équilibré */
+  .press-logo img.press-logo--square {
+    max-height: 44px;
   }
 </style>
