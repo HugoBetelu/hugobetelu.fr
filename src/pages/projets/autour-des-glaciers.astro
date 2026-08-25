@@ -1,0 +1,87 @@
+---
+import ProjectDetail from "../../layouts/ProjectDetail.astro";
+---
+
+<ProjectDetail
+  title="Autour des glaciers"
+  description="Un mini-film sur le tour des glaciers de la Vanoise, entre trail, UTMB et climat."
+  ctaHref="https://www.instagram.com/p/Dcbis1LIQKr/"
+  ctaLabel="Voir le film"
+>
+  <p>J'ai réalisé un mini-film de mon tour des glaciers de la Vanoise.</p>
+  <p>Il s'appelle « Autour des glaciers ».</p>
+  <p>
+    Il a une résonance particulière puisqu'il est diffusé au moment même où des
+    milliers de coureurs s'élancent toute la semaine sur l'UTMB, aux pieds des
+    glaciers, à Chamonix.
+  </p>
+  <p>Cet événement fait couler beaucoup d'encre et soulève de nombreux enjeux.</p>
+  <p>
+    Avec ce mini-film, j'ai souhaité questionner la valeur qu'on accorde à la
+    performance sportive et au gigantisme événementiel quand les glaciers se
+    meurent chaque année un peu plus sous l'effet du réchauffement climatique.
+  </p>
+
+  <ul class="tags">
+    <li class="tag">Trail</li>
+    <li class="tag">UTMB</li>
+    <li class="tag">Climat</li>
+    <li class="tag">Environnement</li>
+    <li class="tag">Événement</li>
+  </ul>
+
+  <aside class="fact">
+    <p class="fact-text">
+      La Vanoise abrite 172 glaciers. Elle est la première calotte glaciaire
+      d'Europe continentale et représente 1/3 de la superficie des glaciers des
+      Alpes françaises.
+    </p>
+    <p class="fact-source">Source : Parc National de la Vanoise</p>
+  </aside>
+
+  {/*
+    IMAGE « Autour des glaciers » — à insérer quand fournie :
+    <img class="single-photo" src="/media/projets/autour-des-glaciers.jpg" alt="Autour des glaciers — les glaciers de la Vanoise" loading="lazy" />
+  */}
+</ProjectDetail>
+
+<style>
+  .tags {
+    list-style: none;
+    margin: 2rem 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tag {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+  }
+  .fact {
+    margin: 2rem 0;
+    padding: 1.25rem 1.5rem;
+    background: #f4f4f4;
+    border-left: 3px solid var(--ink);
+  }
+  .fact-text {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin: 0 0 0.5rem;
+    max-width: none;
+  }
+  .fact-source {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .single-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 2rem 0 0;
+  }
+</style>

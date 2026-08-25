@@ -4,8 +4,15 @@ import Base from "./Base.astro";
 interface Props {
   title: string;
   description?: string;
+  ctaHref?: string;
+  ctaLabel?: string;
 }
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  ctaHref = "https://www.vivaverdon.com/",
+  ctaLabel = "Découvrir Viva Verdon",
+} = Astro.props;
 ---
 
 <Base title={`${title} — Hugo Betelu`} description={description}>
@@ -19,9 +26,9 @@ const { title, description } = Astro.props;
 
     <a
       class="btn btn--solid detail-cta"
-      href="https://www.vivaverdon.com/"
+      href={ctaHref}
       target="_blank"
-      rel="noopener noreferrer">Découvrir Viva Verdon</a>
+      rel="noopener noreferrer">{ctaLabel}</a>
   </main>
 </Base>
 
@@ -52,6 +59,11 @@ const { title, description } = Astro.props;
     line-height: 1.6;
     margin: 1.5rem 0;
     max-width: 40rem;
+  }
+  .detail-body p a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   .detail-body .photos {
     display: grid;
