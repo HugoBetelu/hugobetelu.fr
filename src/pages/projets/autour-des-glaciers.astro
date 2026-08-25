@@ -39,10 +39,14 @@ import ProjectDetail from "../../layouts/ProjectDetail.astro";
     <p class="fact-source">Source : Parc National de la Vanoise</p>
   </aside>
 
-  {/*
-    IMAGE « Autour des glaciers » — à insérer quand fournie :
-    <img class="single-photo" src="/media/projets/autour-des-glaciers.jpg" alt="Autour des glaciers — les glaciers de la Vanoise" loading="lazy" />
-  */}
+  <img
+    class="single-photo"
+    src="/media/projets/autour-des-glaciers.jpg"
+    alt="Mini-film Autour des glaciers — les glaciers de la Vanoise"
+    width="1080"
+    height="1350"
+    loading="lazy"
+  />
 </ProjectDetail>
 
 <style>
@@ -80,8 +84,9 @@ import ProjectDetail from "../../layouts/ProjectDetail.astro";
   }
   .single-photo {
     width: 100%;
+    max-width: 30rem;
     height: auto;
     display: block;
-    margin: 2rem 0 0;
+    margin: 2rem auto 0;
   }
 </style>
