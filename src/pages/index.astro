@@ -71,6 +71,45 @@ import Base from "../layouts/Base.astro";
           <img class="press-logo--square" src="/media/bfm.svg" alt="BFM TV" loading="lazy" />
         </a>
       </div>
+
+      <div class="press-media">
+        <div class="media-embed media-embed--audio">
+          <iframe
+            src="https://open.spotify.com/embed/episode/3gnWxDHAnhb8mXJP8Zfzxw?utm_source=generator"
+            title="Podcast — Viva Verdon (Spotify)"
+            loading="lazy"
+            allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="media-embed media-embed--video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/dcbz4Kz6oPU"
+            title="Viva Verdon — vidéo (YouTube)"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="media-embed media-embed--video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/tKA4FdpatNQ"
+            title="Viva Verdon — vidéo (YouTube)"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="media-embed media-embed--video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/tgN3s351Fq0"
+            title="Viva Verdon — vidéo (YouTube)"
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
     </section>
 
     <!-- Mes réflexions autour du trail -->
@@ -184,6 +223,39 @@ import Base from "../layouts/Base.astro";
   /* logo carré (BFM) : un peu plus haut pour un poids visuel équilibré */
   .press-logo img.press-logo--square {
     max-height: 44px;
+  }
+
+  /* Embeds médias (podcast + vidéos) : 2 par ligne (desktop), empilés (mobile) */
+  .press-media {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 1rem;
+    margin-top: 1.75rem;
+  }
+  .media-embed {
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f4f4f4;
+  }
+  .media-embed iframe {
+    width: 100%;
+    display: block;
+    border: 0;
+  }
+  .media-embed--video {
+    aspect-ratio: 16 / 9;
+  }
+  .media-embed--video iframe {
+    height: 100%;
+  }
+  .media-embed--audio iframe {
+    height: 152px;
+  }
+  @media (max-width: 600px) {
+    .press-media {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* Carte Blanche */
