@@ -7,3 +7,17 @@
   NODE_VERSION = "22"
   # Source de contenu = WordPress (headless), désormais sur le sous-domaine cms.
   PUBLIC_WP_API = "https://cms.hugobetelu.fr/wp-json"
+
+# La page portfolio /design vit encore dans WordPress (cms). En attendant de la
+# reconstruire en Astro, on redirige (302 temporaire) vers le sous-domaine cms.
+[[redirects]]
+  from = "/design"
+  to = "https://cms.hugobetelu.fr/design/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/design/*"
+  to = "https://cms.hugobetelu.fr/design/:splat"
+  status = 302
+  force = true
