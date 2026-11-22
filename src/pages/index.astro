@@ -63,6 +63,15 @@ import Base from "../layouts/Base.astro";
         </a>
         <a
           class="press-logo"
+          href="https://www.laprovence.com/article/region/5942482484665514/le-film-viva-verdon-invite-le-public-a-reflechir-a-limpact-des-sport-exterieurs-saint-julien-du-verdon"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="La Provence (nouvel onglet)"
+        >
+          <img src="/media/laprovence.png" alt="La Provence" loading="lazy" />
+        </a>
+        <a
+          class="press-logo"
           href="https://www.bfmtv.com/cote-d-azur/replay-emissions/les-longs-formats-des-locales-nice-cote-d-azur/video-viva-verdon-un-trail-2-amis-des-rencontres_VN-202604270449.html"
           target="_blank"
           rel="noopener noreferrer"
@@ -196,11 +205,12 @@ import Base from "../layouts/Base.astro";
     color: var(--muted);
     margin: 0 0 1.25rem;
   }
-  /* 3 colonnes égales → toujours sur une seule ligne (desktop + mobile) */
+  /* Logos presse : 4 colonnes (desktop) / 2×2 (mobile) */
   .press-logos {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem 1.5rem;
   }
   .press-logo {
     flex: 1 1 0;
@@ -253,6 +263,9 @@ import Base from "../layouts/Base.astro";
     height: 152px;
   }
   @media (max-width: 600px) {
+    .press-logos {
+      grid-template-columns: repeat(2, 1fr);
+    }
     .press-media {
       grid-template-columns: 1fr;
     }
